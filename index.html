@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure</title>
+</head>
+<body>
+    <h2>Closure</h2>
+    <p>Closure means that an inner function always has access to the vars and parameters of its outer function, even after the outer function has returned.</p>
+    <h3>Question 1: </h3>
+    <pre>
+    function counter(){
+    var counter = 0;
+
+    function IncreaseCounter() {
+        return counter += 1;
+    };
+
+    return IncreaseCounter;
+}
+
+var counter = counter();
+alert(counter());
+alert(counter());
+alert(counter());
+alert(counter());</pre> 
+<p>O/P: 1 2 3 4</p>
+<p>Reason: outer function Counter returns the reference of inner function IncreaseCounter(). IncreaseCounter increases the outer variable counter to one. So calling inner function multiple time will increase the counter to one each time. </p>
+<h3>Question 2: </h3>
+<pre>
+    "let count = 0;
+(function () {
+  if (count === 0) {
+    let count = 1;
+    console.log(count); // What is logged?
+  }
+  console.log(count); // What is logged?
+})();"
+</pre>
+<p>O/P: 1 0</p>
+<p>Reason: we take the count as 0 var closure  from the outer scope. Inside function scope count is equal to 0.
+then, inside this condition, another command let count = 1 announces count a local variable that overwrites count from the outer scope. The first console.log(count) writes down 1.The second console.log(count) writes down 0since here the count variable is accessible from the outer scope.</p>
+<h3>Question 3: </h3>
+<pre>
+    "for (var i = 0; i < 3; i++) {
+        setTimeout(function log() {
+          console.log(i); // What is logged?
+        }, 1000);
+      }"
+</pre>
+<p> O/P: 3 3 3</p>
+<p>Reason: setTimeout() performs the functions log() reads present value variable i asynchronous function var we decarled is hositing performe the top of the function .var is not  create new scope for each iteration.that's why it will only return 3  and writes to the console 3.therefore 3, 3, 3 is written to the console.</p>
+<h3>Question 4: </h3>
+<p>Write a code to calculate area of a rectangle using inner function. In this case outer function should accept parameter length and inner function should accept parameter breadth.</p>
+
+<pre>
+    let a = 5;
+let b = 6;
+function outerFunc(length){
+     length = a;
+     function innerFunc(breadth){
+         breadth = b;
+        
+     }
+}
+ console.log( a * b)
+</pre>
+<p>O/P: 30</p>
+<p>Reason: we let the value a and b and gave the function inner and outer and we console the value</p>
+<h3>Question 5: </h3>
+<p>Take a variable in outer function and create an inner function to increase the counter every time it is called</p>
+<p>Answer: :Closure</p>
+<h3>Question 6: </h3>
+<pre>
+    "Print Output
+var a = 12;
+(function () {
+  alert(a);
+})();"
+</pre>
+<p>O/P : 12</p>
+<p>Reason: By creating a variable called a and assigning it the return value of the function. And then passing this result variable into the alert() function. This will open an alert box with the message 12.</p>
+<h3>Question 7:</h3>
+<pre>"var a = 10;
+    var x = (function () {
+      var a = 12;
+      return function () {
+        alert(a);
+      };
+    })();
+    x();"</pre>
+    <p>O/P: 12</p>
+    <p>Reason: By creating a variable called a and assigning it the return value of the x function. And then passing this 
+        and we assign tha a var again then we return the function variable into the alert() function. This will open an alert box with the message 12. </p>
+
+        <h3>Question 8: </h3>
+        <pre>"var globalVar = "xyz";
+
+            (function outerFunc(outerArg) {
+                var outerVar = 'a';
+                
+                (function innerFunc(innerArg) {
+                var innerVar = 'b';
+                
+                console.log(
+                    "outerArg = " + outerArg + "\n" +
+                    "innerArg = " + innerArg + "\n" +
+                    "outerVar = " + outerVar + "\n" +
+                    "innerVar = " + innerVar + "\n" +
+                    "globalVar = " + globalVar);
+                
+                })(456);
+            })(123);
+            "</pre>
+            <pre>O/P: 
+                outerArg = 123
+                innerArg = 456
+                outerVar = a
+                innerVar = b
+                globalVar = xyz</pre>
+                <p>Reason: we gave the assign the var in globalVar we gave the outer and inner function the we arugment same inner and outer then we console all the scope in the innerFunc</p>
+<script src="./script.js"></script>
+</body>
+</html>
